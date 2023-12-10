@@ -6,7 +6,7 @@
 #    By: nrossa <nrossa@student.42perpignan.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/17 03:47:11 by nrossa            #+#    #+#              #
-#    Updated: 2023/12/10 12:36:56 by nrossa           ###   ########.fr        #
+#    Updated: 2023/12/10 21:13:23 by nrossa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,9 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 RM = /bin/rm -f
 
-HDR = builtins/builtins.h
+HDR = minishell.h builtins/builtins.h
 
-SRC =
+SRC = minishell.c
 OBJS = $(SRC:.c=.o)
 
 BLACK = \033[30m
@@ -38,7 +38,7 @@ NC = \033[0m
 
 $(NAME): $(LIBFT) $(OBJS)
 	@echo "$(RED)Compilation in progress...$(NC)"
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) -lreadline
 	@echo "$(GREEN)Compilation complete !$(NC)"
 
 all: $(NAME)
@@ -67,7 +67,7 @@ norme:
 	@echo "$(GREEN)Checking complete !$(NC)"
 
 compilation: $(LIBFT)
-	$(CC) $(CFLAGS) -g -o $(NAME) $(SRC) $(LIBFT)
+	$(CC) $(CFLAGS) -g -o $(NAME) $(SRC) $(LIBFT) -lreadline
 
 noflags: $(LIBFT)
-	$(CC) -g -o $(NAME) $(SRC) $(LIBFT)
+	$(CC) -g -o $(NAME) $(SRC) $(LIBFT) -lreadline
