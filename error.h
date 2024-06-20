@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nrossa <nrossa@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 04:15:52 by nrossa            #+#    #+#             */
-/*   Updated: 2024/01/05 17:47:46 by nrossa           ###   ########.fr       */
+/*   Created: 2024/01/11 20:35:59 by nrossa            #+#    #+#             */
+/*   Updated: 2024/01/12 11:09:16 by nrossa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef ERROR_H
+# define ERROR_H
+# define SIGNAL_ERROR 128
 
-int	ft_strcmp(const char *s1, const char *s2)
+typedef enum e_error
 {
-	size_t	i;
-	size_t	length;
+	SUCCESS,
+	FAILURE,
+	CMD_LINE,
+	NO_PERMISSIONS = 126,
+	WRONG_CMD,
+	INVALID_EXIT,
+	UNKNOW = 255
+}	t_error;
 
-	if (!s1 || !s2)
-		return (0);
-	if (ft_strlen(s1) < ft_strlen(s2))
-		length = ft_strlen(s1);
-	else
-		length = ft_strlen(s2);
-	i = 0;
-	while (i < length && s1[i] == s2[i])
-		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-}
+#endif

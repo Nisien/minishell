@@ -6,23 +6,30 @@
 #    By: nrossa <nrossa@student.42perpignan.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/17 03:47:11 by nrossa            #+#    #+#              #
-#    Updated: 2023/12/10 21:13:23 by nrossa           ###   ########.fr        #
+#    Updated: 2024/01/12 23:28:30 by hnogared         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY: clean fclean norme compilation noflags
 
 NAME = minishell
-LIBFT_DIR = ./libft/
+LIBFT_DIR = libft/
 LIBFT = $(LIBFT_DIR)libft.a
+TOKEN_DIR = token/
+PARSING_DIR = parsing/
+EXEC_DIR = exec/
+BUILTINS_DIR = builtins/
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 RM = /bin/rm -f
 
-HDR = minishell.h builtins/builtins.h
-
-SRC = minishell.c
+HDR = $(LIBFT_DIR)libft.h minishell.h $(TOKEN_DIR)token.h $(PARSING_DIR)parsing.h error.h
+SRC = minishell.c ft_signals.c ft_clean_ms.c $(addprefix $(TOKEN_DIR), $(TOKEN_SRC)) $(addprefix $(PARSING_DIR), $(PARSING_SRC)) $(addprefix $(EXEC_DIR), $(EXEC_SRC)) $(addprefix $(BUILTINS_DIR), $(BUILTINS_SRC))
+TOKEN_SRC = ft_tokenization.c ft_args.c ft_meta.c ft_quotes.c token_lst.c
+PARSING_SRC = ft_parse.c ft_expand_var.c ft_expand_var_utils.c ft_clear_quotes.c cmd_lst.c ft_free_array.c io_lst.c ft_create_cmd.c
+EXEC_SRC = pipes.c handle_cmd.c get_path.c redirections.c ft_heredoc.c
+BUILTINS_SRC = ft_cd.c ft_echo.c ft_env_lst.c ft_env_utils.c ft_env.c ft_exit.c ft_export.c ft_lst_to_char.c ft_pwd.c ft_unset.c
 OBJS = $(SRC:.c=.o)
 
 BLACK = \033[30m
@@ -67,7 +74,7 @@ norme:
 	@echo "$(GREEN)Checking complete !$(NC)"
 
 compilation: $(LIBFT)
-	$(CC) $(CFLAGS) -g -o $(NAME) $(SRC) $(LIBFT) -lreadline
+	@$(CC) $(CFLAGS) -g -o $(NAME) $(SRC) $(LIBFT) -lreadline
 
 noflags: $(LIBFT)
-	$(CC) -g -o $(NAME) $(SRC) $(LIBFT) -lreadline
+	@$(CC) -g -o $(NAME) $(SRC) $(LIBFT) -lreadline

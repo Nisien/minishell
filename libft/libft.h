@@ -6,7 +6,7 @@
 /*   By: nrossa <nrossa@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 12:37:39 by nrossa            #+#    #+#             */
-/*   Updated: 2023/10/04 04:16:21 by nrossa           ###   ########.fr       */
+/*   Updated: 2024/01/10 21:39:54 by nrossa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char	*get_next_line(int fd);
 char	*ft_gnldup(const char *s, ssize_t nb);
 char	*ft_gnljoin(char *s1, char *s2, ssize_t nb);
 char	*ft_utoa(unsigned int n);
+char	*ft_end_of_string(char *str);
 int		ft_atoi(const char *nptr);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);

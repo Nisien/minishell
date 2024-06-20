@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_clean_ms.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nrossa <nrossa@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 04:15:52 by nrossa            #+#    #+#             */
-/*   Updated: 2024/01/05 17:47:46 by nrossa           ###   ########.fr       */
+/*   Created: 2024/01/12 21:29:23 by nrossa            #+#    #+#             */
+/*   Updated: 2024/01/12 23:05:39 by hnogared         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+void	ft_clean_ms(t_data *data)
 {
-	size_t	i;
-	size_t	length;
-
-	if (!s1 || !s2)
-		return (0);
-	if (ft_strlen(s1) < ft_strlen(s2))
-		length = ft_strlen(s1);
-	else
-		length = ft_strlen(s2);
-	i = 0;
-	while (i < length && s1[i] == s2[i])
-		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	ft_free_array(data->env);
+	ft_envlst_clear(&data->envlst);
+	close(data->std[IN]);
+	close(data->std[OUT]);
+	rl_clear_history();
 }
